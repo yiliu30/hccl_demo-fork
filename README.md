@@ -41,6 +41,11 @@ MPI=1 make
 By default, the demo is built with affinity configuration.<br />
 When switching between MPI and non MPI modes, please remember to run with "-clean".
 
+
+<details>
+
+<summary> Host NIC Scale-Out Setup </summary>
+
 ## ~~Host NIC Scale-Out Setup~~ (Skip this in Intel Gaudi containers)
 > The above steps are not required when running Intel Gaudi containers as OFI Wrapper and libfabric are already installed by default.
 > https://docs.habana.ai/en/latest/API_Reference_Guides/HCCL_APIs/Scale_Out_via_Host_NIC.html#using-host-nic-over-ofi
@@ -148,6 +153,8 @@ This mode is supported with Verbs or EFA provider if the following conditions ar
    MLX5_SCATTER_TO_CQE=0 (For MLX Verbs)
 4. PCIe ACS (Access Control) should be disabled
 
+</details>
+
 ## Python Wrapper Arguments
 ### General flags
     -h, --help               Show this help message and exit.
@@ -234,6 +241,7 @@ Different options for running one server with 8 ranks and size of 32 MB:
 
 > [!TIP]
 > If you are running tests within docker, please expose a PORT for testing. For example, `docker run ... -p 5555:5555`.
+> 
 > `HCCL_COMM_ID` is the IP of first node.
 
 Configuration: 16 ranks, 32 MB size, all_reduce collective, 1000 iterations
@@ -304,6 +312,12 @@ Output example:
     262144        65536         float         sum           <time>        <bandwidth>   <bandwidth>
     524288        131072        float         sum           <time>        <bandwidth>   <bandwidth>
     1048576       262144        float         sum           <time>        <bandwidth>   <bandwidth>
+
+
+<details>
+
+<summary> Examples - MPI mode</summary>
+
 
 ## Examples - MPI mode
 
@@ -376,3 +390,5 @@ Running on 2 servers without MPI (16 Gaudi devices):
 
         Second node:
         HCCL_COMM_ID=10.111.12.234:5555 python3 run_hccl_demo.py --test all_reduce --nranks 16 --loop 1000 --node_id 1 --custom_comm 0,1,8,9
+        
+</details>
