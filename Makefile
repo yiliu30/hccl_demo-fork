@@ -17,5 +17,8 @@ dev:
         -g -Wall -o hccl_demo hccl_demo.cpp affinity.cpp env.cpp send_recv.cpp scale_validation.cpp -D AFFINITY_ENABLED=1  \
         -L${BUILD_ROOT_LATEST}/ -lSynapse -lpthread
 
+kill_demo:
+	ps aux | grep hccl_demo | grep -v grep | awk '{print $2}' | xargs kill -9
+
 clean:
 	rm -f hccl_demo

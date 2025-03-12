@@ -41,8 +41,12 @@ MPI=1 make
 By default, the demo is built with affinity configuration.<br />
 When switching between MPI and non MPI modes, please remember to run with "-clean".
 
-## Host NIC Scale-Out Setup
+## ~~Host NIC Scale-Out Setup~~ (Skip this in Intel Gaudi containers)
+> The above steps are not required when running Intel Gaudi containers as OFI Wrapper and libfabric are already installed by default.
+> https://docs.habana.ai/en/latest/API_Reference_Guides/HCCL_APIs/Scale_Out_via_Host_NIC.html#using-host-nic-over-ofi
+
 ### Download and Install libfabric
+
 libfabric should be downloaded and installed in order to use it.<br />
 Please follow the instructions below:<br />
 1.  Define required version to be installed:
@@ -200,7 +204,7 @@ Run the execution command
 Results are printed to the display<br />
 Results per rank can also be printed to output file by using --result_csv <path_to_file>
 
-## Examples - without MPI
+## Examples - without MPI (Recommended)
 
 **Note**: The following examples are applicable for Gaudi based and Host NIC scale-out.
 
@@ -225,7 +229,12 @@ Different options for running one server with 8 ranks and size of 32 MB:
     HCCL_COMM_ID=127.0.0.1:5555 python3 run_hccl_demo.py --nranks 8 --node_id 0 --size 33554432 --test all_reduce
     HCCL_COMM_ID=127.0.0.1:5555 python3 run_hccl_demo.py --nranks 8 --node_id 0 --size 33554432b --test all_reduce
     HCCL_COMM_ID=127.0.0.1:5555 python3 run_hccl_demo.py --nranks 8 --node_id 0 --size 33554432B --test all_reduce
+
 ### Running HCCL demo on 2 servers (16 Gaudi devices)
+
+> [!TIP]
+> If you are running tests within docker, please expose a PORT for testing. For example, `docker run ... -p 5555:5555`.
+> `HCCL_COMM_ID` is the IP of first node.
 
 Configuration: 16 ranks, 32 MB size, all_reduce collective, 1000 iterations
 
@@ -237,7 +246,7 @@ Second server command:
 
     HCCL_COMM_ID=10.111.12.234:5555 python3 run_hccl_demo.py --test all_reduce --nranks 16 --loop 1000 --node_id 1 --size 32m --ranks_per_node 8
 
-First server output:
+**First server** output:
 
     ###############################################################################
     [BENCHMARK] hcclAllReduce(src!=dst, count=8388608, dtype=float, iterations=1000)
@@ -245,7 +254,27 @@ First server output:
     [BENCHMARK]     Algo Bandwidth   : <Test results> GB/s
     ###############################################################################
 
-### Running HCCL with size range on 1 server (8 Gaudi devices)
+Second server output:
+```bash
+...
+filename = /tmp/affinity_topology_output/.habana_moduleID3
+48 49 50 ...
+moduleID=3 affinity set to = 0000000...
+rank=8 size=33554432 <float> Input Buffer [8 24 40 56 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=10 size=33554432 <float> Input Buffer [10 26 42 58 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=9 size=33554432 <float> Input Buffer [9 25 41 57 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=11 size=33554432 <float> Input Buffer [11 27 43 59 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=12 size=33554432 <float> Input Buffer [12 28 44 60 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=14 size=33554432 <float> Input Buffer [14 30 46 62 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=13 size=33554432 <float> Input Buffer [13 29 45 61 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=15 size=33554432 <float> Input Buffer [15 31 47 63 ...] Output Buffer [120 376 632 888 ...] which is fine.
+```
+
+The above tests are sufficient for vLLM + Ray.
+----------------------------------------------------------------------------
+
+
+### ~~Running HCCL with size range on 1 server (8 Gaudi devices)~~ (SKIP)
 
 Configuration: One server with 8 ranks, size range 32B to 1 MB, all_reduce collective, 1 iteration
 
