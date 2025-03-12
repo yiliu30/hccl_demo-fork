@@ -243,6 +243,7 @@ Different options for running one server with 8 ranks and size of 32 MB:
 > If you are running tests within docker, please expose a PORT for testing. For example, `docker run ... -p 5555:5555`.
 > 
 > `HCCL_COMM_ID` is the IP of **FIRST node**.
+> 
 > Kill all hccl_demos: `make kill_demo`.
 
 Configuration: 16 ranks, 32 MB size, all_reduce collective, 1000 iterations
