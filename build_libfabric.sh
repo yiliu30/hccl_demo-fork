@@ -6,7 +6,7 @@ export REQUIRED_VERSION=1.20.0
 wget  https://github.com/ofiwg/libfabric/releases/download/v$REQUIRED_VERSION/libfabric-$REQUIRED_VERSION.tar.bz2 -P /tmp/libfabric
 pushd /tmp/libfabric
 tar -xf libfabric-$REQUIRED_VERSION.tar.bz2
-export LIBFABRIC_ROOT="/usr/local/libfabric/$REQUIRED_VERSION"
+export LIBFABRIC_ROOT="/usr"
 mkdir -p ${LIBFABRIC_ROOT}
 chmod 777 ${LIBFABRIC_ROOT}
 cd libfabric-$REQUIRED_VERSION/
