@@ -1,0 +1,44 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 1 NODE
+
+rank=0 size=33554432 <float> Input Buffer [0 8 16 24 ...] Output Buffer [28 92 156 220 ...] which is fine.
+rank=3 size=33554432 <float> Input Buffer [3 11 19 27 ...] Output Buffer [28 92 156 220 ...] which is fine.
+rank=1 size=33554432 <float> Input Buffer [1 9 17 25 ...] Output Buffer [28 92 156 220 ...] which is fine.
+rank=2 size=33554432 <float> Input Buffer [2 10 18 26 ...] Output Buffer [28 92 156 220 ...] which is fine.
+rank=7 size=33554432 <float> Input Buffer [7 15 23 31 ...] Output Buffer [28 92 156 220 ...] which is fine.
+rank=4 size=33554432 <float> Input Buffer [4 12 20 28 ...] Output Buffer [28 92 156 220 ...] which is fine.
+rank=6 size=33554432 <float> Input Buffer [6 14 22 30 ...] Output Buffer [28 92 156 220 ...] which is fine.
+rank=5 size=33554432 <float> Input Buffer [5 13 21 29 ...] Output Buffer [28 92 156 220 ...] which is fine.
+#########################################################################################
+[BENCHMARK] hcclAllReduce(dataSize=33554432, count=8388608, dtype=float, iterations=1000)
+[BENCHMARK]     NW Bandwidth   : 5XX.858016 GB/s
+[BENCHMARK]     Algo Bandwidth : 3XX.633152 GB/s
+#########################################################################################
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 2 NODE
+...............
+rank=12 size=33554432 <float> Input Buffer [12 28 44 60 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=9 size=33554432 <float> Input Buffer [9 25 41 57 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=11 size=33554432 <float> Input Buffer [11 27 43 59 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=10 size=33554432 <float> Input Buffer [10 26 42 58 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=14 size=33554432 <float> Input Buffer [14 30 46 62 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=8 size=33554432 <float> Input Buffer [8 24 40 56 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=13 size=33554432 <float> Input Buffer [13 29 45 61 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=15 size=33554432 <float> Input Buffer [15 31 47 63 ...] Output Buffer [120 376 632 888 ...] which is fine.
+
+
+...............
+rank=6 size=33554432 <float> Input Buffer [6 22 38 54 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=5 size=33554432 <float> Input Buffer [5 21 37 53 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=4 size=33554432 <float> Input Buffer [4 20 36 52 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=7 size=33554432 <float> Input Buffer [7 23 39 55 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=0 size=33554432 <float> Input Buffer [0 16 32 48 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=2 size=33554432 <float> Input Buffer [2 18 34 50 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=3 size=33554432 <float> Input Buffer [3 19 35 51 ...] Output Buffer [120 376 632 888 ...] which is fine.
+rank=1 size=33554432 <float> Input Buffer [1 17 33 49 ...] Output Buffer [120 376 632 888 ...] which is fine.
+#########################################################################################
+[BENCHMARK] hcclAllReduce(dataSize=33554432, count=8388608, dtype=float, iterations=1000)
+[BENCHMARK]     NW Bandwidth   : 4XX.545175 GB/s
+[BENCHMARK]     Algo Bandwidth : 2XX.824093 GB/s
+#########################################################################################
