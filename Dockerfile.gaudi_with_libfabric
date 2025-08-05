@@ -1,0 +1,21 @@
+FROM vault.habana.ai/gaudi-docker/1.21.0/ubuntu22.04/habanalabs/pytorch-installer-2.6.0:1.21.0-555
+ 
+ENV LIBFABRIC_ROOT=/opt/libfabric
+ 
+ENV http_proxy=http://proxy-dmz.intel.com:911
+ENV https_proxy=http://proxy-dmz.intel.com:912
+ENV HTTP_PROXY=http://proxy-dmz.intel.com:911
+ENV HTTPS_PROXY=http://proxy-dmz.intel.com:912
+ 
+RUN mkdir -p ${LIBFABRIC_ROOT}
+ 
+WORKDIR /tmp
+ 
+RUN wget https://github.com/ofiwg/libfabric/releases/download/v1.22.0/libfabric-1.22.0.tar.bz2 && \
+    tar -xf libfabric-1.22.0.tar.bz2 && cd libfabric-1.22.0/ && \
+    ./configure --prefix=$LIBFABRIC_ROOT --enable-verbs=yes --with-synapseai=/usr && \
+    make -j && \
+    make install
+ 
+RUN git clone https://github.com/HabanaAI/hccl_ofi_wrapper.git && cd hccl_ofi_wrapper && \
+    make && cp libhccl_ofi_wrapper.so /usr/lib/habanalabs/libhccl_ofi_wrapper.so && ldconfig
